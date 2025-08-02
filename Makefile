@@ -21,7 +21,7 @@ DEP_CXX  ?= $(CXX)
 AR       ?= ar
 RANLIB   ?= ranlib
 STRIP    ?= strip
-CPPFLAGS += -std=gnu++17 -O2 -W -Wall -Werror -Wextra \
+CPPFLAGS += -std=gnu++17 -O2 -W -Wall -Wextra \
     -D__STDC_FORMAT_MACROS -D__STDC_CONSTANT_MACROS
 
 # libsparse
