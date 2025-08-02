@@ -28,7 +28,7 @@ jobs:
     - name: Build simg2img
       shell: msys2 {0}
       run: |
-        CFLAGS="-DUSE_MINGW" LDFLAGS="-lasprintf" make
+        CFLAGS="-DUSE_MINGW" LDFLAGS="-lasprintf" mingw32-make
         
     - name: Collect artifacts
       shell: cmd
