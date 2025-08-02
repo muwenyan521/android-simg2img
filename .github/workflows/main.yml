@@ -1,0 +1,44 @@
+name: Build Windows Simg2img
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    name: Build for Windows
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up MSYS2
+      uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: >-
+          mingw-w64-x86_64-toolchain
+          mingw-w64-x86_64-zlib
+          mingw-w64-x86_64-gettext
+          
+    - name: Build simg2img
+      shell: msys2 {0}
+      run: |
+        CFLAGS="-DUSE_MINGW" LDFLAGS="-lasprintf" make
+        
+    - name: Collect artifacts
+      shell: cmd
+      run: |
+        mkdir artifacts
+        copy simg2img.exe artifacts\
+        copy img2simg.exe artifacts\
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: simg2img-binaries
+        path: artifacts
