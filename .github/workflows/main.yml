@@ -38,7 +38,7 @@ jobs:
         copy img2simg.exe artifacts\
         
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: simg2img-binaries
         path: artifacts
